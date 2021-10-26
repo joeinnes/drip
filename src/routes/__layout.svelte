@@ -1,17 +1,9 @@
 <script>
 	import '../styles/tailwind-output.css';
-
-	import User from '../components/user.svelte';
-
-	import { directus } from '$lib/directus';
-	import { goto } from '$app/navigation';
+	import Navbar from '../components/navbar.svelte';
 </script>
 
-<header class="bg-brand-900 p-2 flex items-center">
-	<h1 class="text-3xl text-brand-50 ">Drip</h1>
-	<div class="flex-grow" />
-	<div><User /></div>
-</header>
-<main class="p-8">
+<Navbar />
+<main class="w-3/4 2xl:w-1/2 p-8 mx-auto">
 	<slot />
 </main>

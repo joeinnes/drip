@@ -1,6 +1,7 @@
 {
   "conventionalCommits.scopes": [
     "ui",
-    "build"
+    "build",
+    "single coffee"
   ]
 }

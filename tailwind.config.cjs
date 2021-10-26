@@ -20,6 +20,9 @@ module.exports = {
 			}
 		}
 	},
+	daisyui: {
+		themes: ['garden']
+	},
 	variants: {
 		extend: {}
 	},

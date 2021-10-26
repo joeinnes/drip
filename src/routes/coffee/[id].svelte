@@ -8,6 +8,7 @@
 				'image.id',
 				'ratings.*',
 				'ratings.directus_users_id.first_name',
+				'ratings.directus_users_id.last_name',
 				'ratings.directus_users_id.avatar'
 			]
 		});
@@ -17,6 +18,7 @@
 </script>
 
 <script>
+	import CoffeeCard from '../../components/coffee-card.svelte';
 	import Rating from '../../components/rating.svelte';
 </script>
 
@@ -24,18 +26,7 @@
 	<title>{coffee.name}</title>
 </svelte:head>
 
-<div class="card mx-auto mb-6">
-	<h1 class="mr-4">
-		{coffee.name}
-		<span class="font-semibold text-sm text-brand-400">{coffee.cost.toLocaleString()} HUF/kg</span>
-	</h1>
-	<img
-		src={`${import.meta.env.VITE_API_URL}/assets/${coffee.image.id}`}
-		alt={coffee.name}
-		class="mx-auto"
-	/>
-	<p>{coffee.description}</p>
-</div>
+<CoffeeCard {coffee} side={true} />
 
 {#if coffee.ratings}
 	{#each coffee.ratings as rating}
