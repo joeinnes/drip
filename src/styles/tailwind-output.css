@@ -1703,27 +1703,12 @@ html {
 	--tw-text-opacity: 1;
 	color: hsla(var(--pc)/var(--tw-text-opacity,1));
 }
-.btn-outline.btn-accent .badge {
-	--tw-bg-opacity: 1;
-	background-color: hsla(var(--a)/var(--tw-bg-opacity,1));
-	--tw-border-opacity: 1;
-	border-color: hsla(var(--a)/var(--tw-border-opacity,1));
-	--tw-text-opacity: 1;
-	color: hsla(var(--ac)/var(--tw-text-opacity,1));
-}
 .btn-outline.btn-primary .badge-outline {
 	background-color: transparent;
 	--tw-border-opacity: 1;
 	border-color: hsla(var(--p)/var(--tw-border-opacity,1));
 	--tw-text-opacity: 1;
 	color: hsla(var(--p)/var(--tw-text-opacity,1));
-}
-.btn-outline.btn-accent .badge-outline {
-	background-color: transparent;
-	--tw-border-opacity: 1;
-	border-color: hsla(var(--a)/var(--tw-border-opacity,1));
-	--tw-text-opacity: 1;
-	color: hsla(var(--a)/var(--tw-text-opacity,1));
 }
 .btn-outline.btn-primary:hover .badge {
 	--tw-bg-opacity: 1;
@@ -1740,22 +1725,6 @@ html {
 	border-color: hsla(var(--pc)/var(--tw-border-opacity,1));
 	--tw-text-opacity: 1;
 	color: hsla(var(--pc)/var(--tw-text-opacity,1));
-}
-.btn-outline.btn-accent:hover .badge {
-	--tw-bg-opacity: 1;
-	background-color: hsla(var(--ac)/var(--tw-bg-opacity,1));
-	--tw-border-opacity: 1;
-	border-color: hsla(var(--ac)/var(--tw-border-opacity,1));
-	--tw-text-opacity: 1;
-	color: hsla(var(--a)/var(--tw-text-opacity,1));
-}
-.btn-outline.btn-accent:hover .badge.outline {
-	--tw-bg-opacity: 1;
-	background-color: hsla(var(--af)/var(--tw-bg-opacity,1));
-	--tw-border-opacity: 1;
-	border-color: hsla(var(--ac)/var(--tw-border-opacity,1));
-	--tw-text-opacity: 1;
-	color: hsla(var(--ac)/var(--tw-text-opacity,1));
 }
 .btn:active:focus,.btn:active:hover {
 	-webkit-animation: none;
@@ -1788,23 +1757,6 @@ html {
 .btn-primary:focus-visible {
 	box-shadow: 0 0 0 2px hsl(var(--b1)),0 0 0 4px hsl(var(--p));
 }
-.btn-accent {
-	--tw-bg-opacity: 1;
-	background-color: hsla(var(--a)/var(--tw-bg-opacity,1));
-	--tw-border-opacity: 1;
-	border-color: hsla(var(--a)/var(--tw-border-opacity,1));
-	--tw-text-opacity: 1;
-	color: hsla(var(--ac)/var(--tw-text-opacity,1));
-}
-.btn-accent.btn-active,.btn-accent:hover {
-	--tw-bg-opacity: 1;
-	background-color: hsla(var(--af)/var(--tw-bg-opacity,1));
-	--tw-border-opacity: 1;
-	border-color: hsla(var(--af)/var(--tw-border-opacity,1));
-}
-.btn-accent:focus-visible {
-	box-shadow: 0 0 0 2px hsl(var(--b1)),0 0 0 4px hsl(var(--a));
-}
 .btn.glass.btn-active,.btn.glass:hover {
 	--glass-opacity: 25%;
 	--glass-border-opacity: 15%;
@@ -1823,18 +1775,6 @@ html {
 	border-color: hsla(var(--pf)/var(--tw-border-opacity,1));
 	--tw-text-opacity: 1;
 	color: hsla(var(--pc)/var(--tw-text-opacity,1));
-}
-.btn-outline.btn-accent {
-	--tw-text-opacity: 1;
-	color: hsla(var(--a)/var(--tw-text-opacity,1));
-}
-.btn-outline.btn-accent:hover {
-	--tw-bg-opacity: 1;
-	background-color: hsla(var(--af)/var(--tw-bg-opacity,1));
-	--tw-border-opacity: 1;
-	border-color: hsla(var(--af)/var(--tw-border-opacity,1));
-	--tw-text-opacity: 1;
-	color: hsla(var(--ac)/var(--tw-text-opacity,1));
 }
 .btn.loading.btn-circle:before,.btn.loading.btn-square:before {
 	margin-right: 0;
@@ -1953,9 +1893,6 @@ html {
 }
 .drawer-toggle:focus-visible~.drawer-content .drawer-button.btn-primary {
 	box-shadow: 0 0 0 2px hsl(var(--b1)),0 0 0 4px hsl(var(--p));
-}
-.drawer-toggle:focus-visible~.drawer-content .drawer-button.btn-accent {
-	box-shadow: 0 0 0 2px hsl(var(--b1)),0 0 0 4px hsl(var(--a));
 }
 .label-text {
 	font-size: .875rem;
