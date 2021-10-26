@@ -45,13 +45,44 @@
 	<title>Log In</title>
 </svelte:head>
 
-<form on:submit={login} class="card mx-auto flex flex-col">
-	<h1>Log In</h1>
-	<input type="email" placeholder="Enter user name..." bind:value={email} required />
-	<input bind:value={password} type="password" placeholder="Enter password..." required />
-	{#if isLoading}
-		<button type="submit" disabled>Log In</button>
-	{:else}
-		<button type="submit">Log In</button>
-	{/if}
-</form>
+<div class="shadow-2xl card bordered">
+	<div class="card-body">
+		<form on:submit={login}>
+			<h1 class="card-title">Log In</h1>
+			<div class="form-control">
+				<label class="label" for="email">
+					<span class="label-text">Username</span>
+				</label>
+				<input
+					type="email"
+					name="email"
+					placeholder="Enter user name..."
+					class="input input-bordered"
+					bind:value={email}
+					required
+				/>
+			</div>
+			<div class="form-control">
+				<label class="label" for="password">
+					<span class="label-text">Password</span>
+				</label>
+				<input
+					bind:value={password}
+					name="password"
+					type="password"
+					placeholder="Enter password..."
+					class="input input-bordered"
+					required
+				/>
+			</div>
+
+			<div class="justify-center card-actions">
+				{#if isLoading}
+					<button type="submit" disabled class="btn btn-primary btn-disabled">Log In</button>
+				{:else}
+					<button type="submit" class="btn btn-primary">Log In</button>
+				{/if}
+			</div>
+		</form>
+	</div>
+</div>
