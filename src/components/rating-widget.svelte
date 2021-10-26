@@ -2,7 +2,7 @@
 	import CoffeeBean from '../../static/coffee_bean.webp';
 	import CoffeeBeanHalf from '../../static/coffee_bean_half.webp';
 	import CoffeeBeanFilled from '../../static/coffee_bean_full.webp';
-	export let rating = 7;
+	export let rating = 0;
 	export let interactive = true;
 
 	const mouseMoveHandler = (e) => {
@@ -58,51 +58,3 @@
 		/>
 	{/each}
 </div>
-
-<!--
-
-  return (
-    <Box pos="relative" maxW="100%">
-      <HStack
-        onClick={(e) => {
-          if (!interactive) return;
-          setIsInteractive(!isInteractive);
-          mouseMoveHandler(e);
-        }}
-      >
-        {[...Array(Math.floor(newRating / 2))].map((e, i) => (
-          <Image
-            src="/coffee_bean_full.webp"
-            width={32}
-            height={32}
-            key={i}
-            id={"" + i * 2}
-            onMouseMove={mouseMoveHandler}
-          />
-        ))}
-        {newRating % 2 !== 0 && (
-          <Image
-            src="/coffee_bean_half.webp"
-            width={32}
-            height={32}
-            onMouseMove={mouseMoveHandler}
-            id={"" + Math.floor(newRating - (newRating % 2))}
-          />
-        )}
-        {[...Array(Math.floor((10 - newRating) / 2))].map((e, i) => (
-          <Image
-            src="/coffee_bean.webp"
-            width={32}
-            height={32}
-            key={i}
-            id={"" + (Math.ceil(newRating) + i)}
-            onMouseMove={mouseMoveHandler}
-          />
-        ))}
-      </HStack>
-    </Box>
-  );
-};
-
-export default RatingWidget;
--->

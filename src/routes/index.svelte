@@ -2,7 +2,9 @@
 	import { directus } from '$lib/directus';
 	let coffees = [];
 	export async function load() {
-		let { data } = await directus.items('coffees').readMany({ fields: ['*', 'image.id'] });
+		let { data } = await directus
+			.items('coffees')
+			.readMany({ fields: ['*', 'image.id', 'ratings.rating'] });
 		coffees = data;
 		return {};
 	}

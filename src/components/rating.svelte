@@ -18,10 +18,11 @@
 			<p>{rating.directus_users_id.first_name} {rating.directus_users_id.last_name}</p>
 		</div>
 
-		<div class="max-w-3/4 p-2">
-			<p class="max-w-3/4">{rating.comments}</p>
-			<RatingWidget />
-			<p>{rating.rating}/10</p>
+		<div class="p-2">
+			<p class="mb-1">{rating.comments}</p>
+			<div class="w-32">
+				<RatingWidget rating={rating.rating} interactive={false} />
+			</div>
 		</div>
 	</div>
 </div>

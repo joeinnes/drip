@@ -1413,6 +1413,9 @@ html {
 .mr-2 {
 	margin-right: 0.5rem;
 }
+.mb-1 {
+	margin-bottom: 0.25rem;
+}
 .block {
 	display: block;
 }
@@ -1455,6 +1458,12 @@ html {
 .w-3\/4 {
 	width: 75%;
 }
+.w-48 {
+	width: 12rem;
+}
+.w-32 {
+	width: 8rem;
+}
 .max-w-full {
 	max-width: 100%;
 }
@@ -1484,6 +1493,9 @@ html {
 }
 .justify-center {
 	justify-content: center;
+}
+.justify-between {
+	justify-content: space-between;
 }
 .gap-4 {
 	gap: 1rem;
