@@ -9,8 +9,12 @@
 </script>
 
 <div class={`shadow-lg card bg-white mb-8 ${side && 'flex flex-col lg:flex-row'}`}>
-	<figure>
-		<img src={`${import.meta.env.VITE_API_URL}/assets/${coffee?.image?.id}`} alt={coffee.name} />
+	<figure style="relative padding-top: 56.25%">
+		<img
+			src={`${import.meta.env.VITE_API_URL}/assets/${coffee?.image?.id}`}
+			alt={coffee.name}
+			class="object-contain"
+		/>
 	</figure>
 	<div class="card-body">
 		<div class="flex justify-between items-center">

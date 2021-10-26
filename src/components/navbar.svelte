@@ -1,20 +1,9 @@
 <script>
 	import { directus } from '$lib/directus';
 	import { goto } from '$app/navigation';
-	import { onMount } from 'svelte';
-	let me = null;
-	let loading = true;
+	export let me = null,
+		loading = false;
 
-	onMount(async () => {
-		try {
-			me = await directus.users.me.read();
-		} catch (e) {
-			console.log('Not logged in');
-		} finally {
-			loading = false;
-			return {};
-		}
-	});
 	const logout = async () => {
 		await directus.auth.logout();
 		goto('/login');
