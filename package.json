@@ -32,6 +32,8 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@directus/sdk": "^9.0.0-rc.99"
+		"@directus/sdk": "^9.0.0-rc.99",
+		"@tailwindcss/typography": "^0.4.1",
+		"daisyui": "^1.16.0"
 	}
 }
