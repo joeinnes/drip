@@ -9,11 +9,12 @@
 </script>
 
 <div class={`shadow-lg card bg-white mb-8 ${side && 'flex flex-col lg:flex-row'}`}>
-	<figure style="relative padding-top: 56.25%">
+	<figure class="relative">
 		<img
 			src={`${import.meta.env.VITE_API_URL}/assets/${coffee?.image?.id}`}
 			alt={coffee.name}
 			class="object-contain"
+			style="max-height:50vh;"
 		/>
 	</figure>
 	<div class="card-body">
