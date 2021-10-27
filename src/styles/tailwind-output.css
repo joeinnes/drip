@@ -618,6 +618,36 @@ html {
 	--tab-border: 1px;
 	--tab-radius: 0.5rem;
 }
+.alert>:not([hidden])~:not([hidden]) {
+	--tw-space-y-reverse: 0;
+	margin-top: calc(0.5rem*(1 - var(--tw-space-y-reverse)));
+	margin-bottom: calc(0.5rem*var(--tw-space-y-reverse));
+}
+.alert {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	--tw-bg-opacity: 1;
+	background-color: hsla(var(--b2)/var(--tw-bg-opacity,1));
+	padding: 1rem;
+	border-radius: var(--rounded-box,1rem);
+}
+@media (min-width:768px) {
+
+	.alert>:not([hidden])~:not([hidden]) {
+		--tw-space-y-reverse: 0;
+		margin-top: calc(0px*(1 - var(--tw-space-y-reverse)));
+		margin-bottom: calc(0px*var(--tw-space-y-reverse));
+	}
+
+	.alert {
+		flex-direction: row;
+	}
+}
+.alert>* {
+	display: flex;
+}
 .avatar {
 	display: inline-flex;
 	position: relative;
@@ -1273,6 +1303,23 @@ html {
 .btn-success:focus-visible {
 	box-shadow: 0 0 0 2px hsl(var(--b1)),0 0 0 4px hsl(var(--su));
 }
+.btn-error {
+	--tw-bg-opacity: 1;
+	background-color: hsla(var(--er)/var(--tw-bg-opacity,1));
+	--tw-border-opacity: 1;
+	border-color: hsla(var(--er)/var(--tw-border-opacity,1));
+	--tw-text-opacity: 1;
+	color: hsla(var(--b2)/var(--tw-text-opacity,1));
+}
+.btn-error.btn-active,.btn-error:hover {
+	--tw-bg-opacity: 1;
+	background-color: hsla(var(--er)/var(--tw-bg-opacity,1));
+	--tw-border-opacity: 1;
+	border-color: hsla(var(--er)/var(--tw-border-opacity,1));
+}
+.btn-error:focus-visible {
+	box-shadow: 0 0 0 2px hsl(var(--b1)),0 0 0 4px hsl(var(--er));
+}
 .btn.glass.btn-active,.btn.glass:hover {
 	--glass-opacity: 25%;
 	--glass-border-opacity: 15%;
@@ -1325,6 +1372,18 @@ html {
 	background-color: hsla(var(--su)/var(--tw-bg-opacity,1));
 	--tw-border-opacity: 1;
 	border-color: hsla(var(--su)/var(--tw-border-opacity,1));
+	--tw-text-opacity: 1;
+	color: hsla(var(--nc)/var(--tw-text-opacity,1));
+}
+.btn-outline.btn-error {
+	--tw-text-opacity: 1;
+	color: hsla(var(--er)/var(--tw-text-opacity,1));
+}
+.btn-outline.btn-error:hover {
+	--tw-bg-opacity: 1;
+	background-color: hsla(var(--er)/var(--tw-bg-opacity,1));
+	--tw-border-opacity: 1;
+	border-color: hsla(var(--er)/var(--tw-border-opacity,1));
 	--tw-text-opacity: 1;
 	color: hsla(var(--nc)/var(--tw-text-opacity,1));
 }
@@ -1470,6 +1529,9 @@ html {
 }
 .drawer-toggle:focus-visible~.drawer-content .drawer-button.btn-success {
 	box-shadow: 0 0 0 2px hsl(var(--b1)),0 0 0 4px hsl(var(--su));
+}
+.drawer-toggle:focus-visible~.drawer-content .drawer-button.btn-error {
+	box-shadow: 0 0 0 2px hsl(var(--b1)),0 0 0 4px hsl(var(--er));
 }
 .dropdown.dropdown-hover:hover .dropdown-content,.dropdown.dropdown-open .dropdown-content,.dropdown:focus-within .dropdown-content,.dropdown:focus .dropdown-content {
 	--tw-scale-x: 1;
@@ -1670,12 +1732,24 @@ html {
 .rounded-box {
 	border-radius: var(--rounded-box,1rem);
 }
+.btn-sm {
+	height: 2rem;
+	padding-left: .75rem;
+	padding-right: .75rem;
+	min-height: 2rem;
+	font-size: .875rem;
+}
 .btn-lg {
 	height: 4rem;
 	padding-left: 1.5rem;
 	padding-right: 1.5rem;
 	min-height: 4rem;
 	font-size: 1.125rem;
+}
+.btn-square.btn-sm {
+	height: 2rem;
+	padding: 0;
+	width: 2rem;
 }
 .btn-square.btn-lg {
 	height: 4rem;
@@ -1713,6 +1787,13 @@ html {
 	line-height: 2;
 	padding-left: 1rem;
 	padding-right: 1rem;
+}
+.alert-error {
+	--tw-bg-opacity: 1;
+	--tw-bg-opacity: 0.1;
+	background-color: hsla(var(--er)/var(--tw-bg-opacity,1));
+	--tw-text-opacity: 1;
+	color: hsla(var(--er)/var(--tw-text-opacity,1));
 }
 .avatar.online:before {
 	content: "";
@@ -1840,6 +1921,9 @@ html {
 .h-40 {
 	height: 10rem;
 }
+.h-4 {
+	height: 1rem;
+}
 .w-1\/3 {
 	width: 33.333333%;
 }
@@ -1872,6 +1956,9 @@ html {
 }
 .w-64 {
 	width: 16rem;
+}
+.w-4 {
+	width: 1rem;
 }
 .max-w-full {
 	max-width: 100%;
@@ -1947,6 +2034,9 @@ html {
 	--tw-bg-opacity: 1;
 	background-color: hsla(var(--p) / var(--tw-bg-opacity));
 }
+.stroke-current {
+	stroke: currentColor;
+}
 .object-contain {
 	-o-object-fit: contain;
 	   object-fit: contain;
@@ -2015,6 +2105,16 @@ html {
 }
 .first\:rounded-full:first-child {
 	border-radius: 9999px;
+}
+@media (min-width: 768px) {
+
+	.md\:h-6 {
+		height: 1.5rem;
+	}
+
+	.md\:w-6 {
+		width: 1.5rem;
+	}
 }
 @media (min-width: 1024px) {
 
