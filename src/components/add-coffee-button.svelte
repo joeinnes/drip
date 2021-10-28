@@ -17,7 +17,7 @@
   </div>
   <ul tabindex="0" class="p-2 shadow menu dropdown-content bg-white rounded-box w-52">
     <li>
-      <a href="/">Add Rating</a>
+      <a href="/rating/new">Add Rating</a>
     </li>
     <li>
       <a href="/coffee/new">Add Coffee</a>

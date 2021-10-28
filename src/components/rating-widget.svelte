@@ -1,7 +1,7 @@
 <script>
-  import CoffeeBean from '../../static/coffee_bean.webp';
-  import CoffeeBeanHalf from '../../static/coffee_bean_half.webp';
-  import CoffeeBeanFilled from '../../static/coffee_bean_full.webp';
+  import CoffeeBean from '/coffee_bean.webp';
+  import CoffeeBeanHalf from '/coffee_bean_half.webp';
+  import CoffeeBeanFilled from '/coffee_bean_full.webp';
   export let rating = null;
   export let interactive = true;
   let active = false;

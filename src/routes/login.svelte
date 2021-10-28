@@ -1,9 +1,11 @@
 <script context="module">
   import { goto } from '$app/navigation';
+  import { session } from '$app/stores';
   import { directus } from '$lib/directus';
   export async function load() {
     try {
-      await directus.users.me.read();
+      const user = await directus.users.me.read();
+      session.set(user);
       goto('/');
     } catch (e) {
       console.log('Not logged in');

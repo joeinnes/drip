@@ -1,9 +1,10 @@
 <script>
   import { directus } from '$lib/directus';
   import { goto } from '$app/navigation';
-  export let me = null,
-    loading = false;
+  import { session } from '$app/stores';
 
+  const me = $session?.user;
+  export let loading = true;
   const logout = async () => {
     await directus.auth.logout();
     goto('/login');
@@ -12,7 +13,7 @@
 
 <div class="mb-2 shadow-lg navbar bg-neutral text-neutral-content">
   <div class="flex-1 px-2 mx-2">
-    <a href="/" class="text-2xl font-bold"> {import.meta.env.VITE_APP_NAME} </a>
+    <a href="/" class="text-2xl font-bold"> {import.meta.env.VITE_APP_NAME}</a>
   </div>
 
   {#if !loading}
