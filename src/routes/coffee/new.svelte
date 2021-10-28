@@ -37,7 +37,6 @@
 			}
 			const { id: imgId } = await uploadImage();
 			const res = await directus.items('coffees').createOne({ ...form, image: imgId });
-			loading = false;
 		} catch (e) {
 			error = e;
 		} finally {
@@ -177,8 +176,8 @@
 								stroke-width="2"
 								d="M6 18L18 6M6 6l12 12"
 							/>
-						</svg></button
-					>
+						</svg>
+					</button>
 				</div>
 			</div>
 		{/if}
