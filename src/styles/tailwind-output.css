@@ -1822,6 +1822,10 @@ html {
 .m-2 {
 	margin: 0.5rem;
 }
+.my-4 {
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+}
 .mx-2 {
 	margin-left: 0.5rem;
 	margin-right: 0.5rem;
@@ -1829,14 +1833,6 @@ html {
 .mx-auto {
 	margin-left: auto;
 	margin-right: auto;
-}
-.my-2 {
-	margin-top: 0.5rem;
-	margin-bottom: 0.5rem;
-}
-.my-4 {
-	margin-top: 1rem;
-	margin-bottom: 1rem;
 }
 .mb-8 {
 	margin-bottom: 2rem;
@@ -1880,6 +1876,12 @@ html {
 .h-10 {
 	height: 2.5rem;
 }
+.h-6 {
+	height: 1.5rem;
+}
+.h-4 {
+	height: 1rem;
+}
 .h-auto {
 	height: auto;
 }
@@ -1895,12 +1897,6 @@ html {
 .h-full {
 	height: 100%;
 }
-.h-6 {
-	height: 1.5rem;
-}
-.h-4 {
-	height: 1rem;
-}
 .w-10 {
 	width: 2.5rem;
 }
@@ -1910,20 +1906,17 @@ html {
 .w-32 {
 	width: 8rem;
 }
-.w-full {
-	width: 100%;
-}
-.w-16 {
-	width: 4rem;
-}
-.w-3\/4 {
-	width: 75%;
-}
 .w-6 {
 	width: 1.5rem;
 }
 .w-4 {
 	width: 1rem;
+}
+.w-full {
+	width: 100%;
+}
+.w-16 {
+	width: 4rem;
 }
 .max-w-full {
 	max-width: 100%;
@@ -1952,9 +1945,6 @@ html {
 .items-center {
 	align-items: center;
 }
-.justify-start {
-	justify-content: flex-start;
-}
 .justify-end {
 	justify-content: flex-end;
 }
@@ -1976,28 +1966,11 @@ html {
 .rounded-lg {
 	border-radius: 0.5rem;
 }
-.border-4 {
-	border-width: 4px;
-}
-.border-8 {
-	border-width: 8px;
-}
 .border-2 {
 	border-width: 2px;
 }
-.border-dashed {
-	border-style: dashed;
-}
 .border-dotted {
 	border-style: dotted;
-}
-.border-accent {
-	--tw-border-opacity: 1;
-	border-color: hsla(var(--a) / var(--tw-border-opacity));
-}
-.border-error {
-	--tw-border-opacity: 1;
-	border-color: hsla(var(--er) / var(--tw-border-opacity));
 }
 .border-neutral {
 	--tw-border-opacity: 1;
@@ -2015,17 +1988,9 @@ html {
 	--tw-bg-opacity: 1;
 	background-color: rgba(95, 78, 32, var(--tw-bg-opacity));
 }
-.bg-primary {
-	--tw-bg-opacity: 1;
-	background-color: hsla(var(--p) / var(--tw-bg-opacity));
-}
 .bg-secondary {
 	--tw-bg-opacity: 1;
 	background-color: hsla(var(--s) / var(--tw-bg-opacity));
-}
-.bg-accent {
-	--tw-bg-opacity: 1;
-	background-color: hsla(var(--a) / var(--tw-bg-opacity));
 }
 .stroke-current {
 	stroke: currentColor;
@@ -2055,14 +2020,14 @@ html {
 	padding-top: 0.25rem;
 	padding-bottom: 0.25rem;
 }
-.pr-3 {
-	padding-right: 0.75rem;
-}
 .pt-4 {
 	padding-top: 1rem;
 }
 .pl-2 {
 	padding-left: 0.5rem;
+}
+.pr-3 {
+	padding-right: 0.75rem;
 }
 .text-2xl {
 	font-size: 1.5rem;
@@ -2131,17 +2096,7 @@ html {
 }
 @media (min-width: 1280px) {
 
-	.xl\:grid-cols-2 {
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-	}
-
 	.xl\:grid-cols-3 {
 		grid-template-columns: repeat(3, minmax(0, 1fr));
-	}
-}
-@media (min-width: 1536px) {
-
-	.\32xl\:w-1\/2 {
-		width: 50%;
 	}
 }
