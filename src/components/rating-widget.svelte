@@ -4,13 +4,14 @@
   import CoffeeBeanFilled from '../../static/coffee_bean_full.webp';
   export let rating = null;
   export let interactive = true;
+  let active = false;
 
   const mouseMoveHandler = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const offset = parseInt(e.currentTarget.id, 10);
 
-    if (isNaN(offset)) return;
+    if (isNaN(offset) || !active) return;
 
     if (x < rect.width / 2) {
       if (interactive) {
@@ -24,7 +25,7 @@
   };
 </script>
 
-<div class="flex max-w-full">
+<div class="flex max-w-full" on:click={() => (active = !active)}>
   {#if rating === 0 && !interactive}
     No rating yet!
   {:else}
@@ -35,6 +36,7 @@
         alt="Filled coffee bean"
         class="block h-auto w-full"
         id={'' + i * 2}
+        rel="preload"
         on:mousemove={mouseMoveHandler}
       />
     {/each}
@@ -46,6 +48,7 @@
         alt="Half filled coffee bean"
         class="block h-auto w-full"
         id={'' + (rating - 1)}
+        rel="preload"
         on:mousemove={mouseMoveHandler}
       />
     {/if}
@@ -57,6 +60,7 @@
         alt="Empty coffee bean"
         class="block h-auto w-full"
         id={'' + (2 * Math.ceil(rating / 2) + i)}
+        rel="preload"
         on:mousemove={mouseMoveHandler}
       />
     {/each}
