@@ -21,7 +21,6 @@
   import Navbar from '$lib/components/navbar.svelte';
   import { session } from '$app/stores';
   const me = $session.user;
-  let loading = false;
 </script>
 
 <Navbar {loading} />
