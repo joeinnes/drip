@@ -2,6 +2,8 @@
   import { directus } from '../../lib/directus';
   import { slide } from 'svelte/transition';
   import { goto } from '$app/navigation';
+  import ErrorAlert from '../../components/error-alert.svelte';
+
   let droppedFile: File,
     preview: string | ArrayBuffer,
     loading: boolean = false,
@@ -16,6 +18,7 @@
       errorTimeout = null;
     }, 5000);
   };
+
   const dropHandler = (e: DragEvent) => {
     try {
       droppedFile = e.dataTransfer.files[0];
@@ -162,44 +165,7 @@
       </div>
     </div>
     {#if error}
-      <div class="alert alert-error mb-4" transition:slide>
-        <div class="flex-1">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            class="w-6 h-6 mx-2 stroke-current"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"
-            />
-          </svg>
-          <span>{error}</span>
-        </div>
-        <div class="flex-none">
-          <button
-            class="btn btn-sm btn-primary btn-error btn-circle text-white"
-            on:click={() => (error = null)}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              class="inline-block w-4 h-4 stroke-current md:w-6 md:h-6"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
-        </div>
-      </div>
+      <ErrorAlert {error} clearError={() => (error = null)} />
     {/if}
     <button class="btn btn-primary" type="submit" on:click|preventDefault={submitForm}
       >Submit</button
