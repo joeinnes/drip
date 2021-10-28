@@ -1,14 +1,44 @@
+<script context="module" lang="ts">
+  import { directus, Coffee } from '$lib/directus';
+  let coffee: Coffee;
+  export async function load({ page }) {
+    try {
+      const data = (await directus
+        .items('coffees')
+        .readOne(page.params.id, { fields: ['*', 'image.id'] })) as Coffee;
+      coffee = data;
+    } catch (e) {
+      return {
+        status: 404,
+        error: 'This coffee does not exist'
+      };
+    }
+    return {
+      props: {
+        form: {
+          name: coffee.name,
+          description: coffee.description,
+          link: coffee.link,
+          cost: coffee.cost
+        },
+        preview: `${import.meta.env.VITE_API_URL}/assets/${coffee.image.id}`
+      }
+    };
+  }
+</script>
+
 <script lang="ts">
   import ImageInput from '$lib/components/image-input.svelte';
-  import { directus } from '$lib/directus';
   import { slide } from 'svelte/transition';
   import { goto } from '$app/navigation';
   import ErrorAlert from '$lib/components/error-alert.svelte';
 
   let droppedFile: File,
-    loading: boolean = true,
+    loading: boolean = false,
     error: string = null,
     errorTimeout: NodeJS.Timeout = null,
+    imgChanged: boolean = false;
+  export let preview: string,
     form = { name: null, description: null, link: null, cost: null };
 
   const setError = (err: string) => {
@@ -17,6 +47,17 @@
       error = null;
       errorTimeout = null;
     }, 5000);
+  };
+
+  const dropHandler = (e: DragEvent) => {
+    try {
+      droppedFile = e.dataTransfer.files[0];
+      let reader = new FileReader();
+      reader.readAsDataURL(droppedFile);
+      reader.onloadend = () => (preview = reader.result as string);
+    } catch (e) {
+      setError('File could not be processed.');
+    }
   };
 
   const uploadImage = async () => {
@@ -42,12 +83,19 @@
   const submitForm = async () => {
     try {
       loading = true;
-      if (!(form.name && form.description && form.link && form.cost && droppedFile)) {
+      if (
+        !(form.name && form.description && form.link && form.cost) ||
+        (imgChanged && !droppedFile)
+      ) {
         setError('Not all data provided');
         throw new Error();
       }
-      const { id: imgId } = await uploadImage();
-      const res = await directus.items('coffees').createOne({ ...form, image: imgId });
+      let imgId = coffee.image.id;
+      if (imgChanged) {
+        const imgRes = await uploadImage();
+        imgId = imgRes.id;
+      }
+      const res = await directus.items('coffees').updateOne(coffee.id, { ...form, image: imgId });
       goto(`/coffee/${res.id}`);
     } catch (e) {
       setError(error || 'An unknown error occurred');
@@ -93,7 +141,7 @@
           />
         </div>
       </div>
-      <ImageInput errorHandler={setError} bind:droppedFile />
+      <ImageInput {preview} errorHandler={setError} bind:isChanged={imgChanged} bind:droppedFile />
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
