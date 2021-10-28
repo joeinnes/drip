@@ -92,7 +92,7 @@
           required
         />
       </div>
-      <div class="mb-2">
+      <div class="mt-4">
         {#if error}
           <ErrorAlert bind:error {clearError} />
         {/if}
