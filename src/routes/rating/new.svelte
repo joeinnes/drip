@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { directus } from '$lib/directus';
+  import { directus, Coffee, User, Rating } from '$lib/directus';
   import { slide } from 'svelte/transition';
   import { goto } from '$app/navigation';
   import ErrorAlert from '$lib/components/error-alert.svelte';
@@ -9,8 +9,8 @@
   let loading: boolean = false,
     error: string = null,
     errorTimeout: NodeJS.Timeout = null,
-    coffeeList = [],
-    me = { id: null },
+    coffeeList: Coffee[] = null,
+    me: User | null = null,
     form = { comments: null, rating: null, coffees_id: null };
 
   const setError = (err: string) => {
@@ -28,10 +28,11 @@
         setError('Not all data provided');
         throw new Error();
       }
+
+      // Below line also upsets TS
       const res = await directus
         .items('coffees_directus_users')
-        .createOne({ ...form, directus_users_id: me.id });
-      console.log(res);
+        .createOne({ ...form, directus_users_id: me.id } as any);
       goto(`/coffee/${res.coffees_id}`);
     } catch (e) {
       setError(error || 'An unknown error occurred');
@@ -41,7 +42,7 @@
   };
 
   onMount(async () => {
-    me = await directus.users.me.read();
+    me = (await directus.users.me.read()) as User;
     const { data: ratedCoffees } = await directus.items('coffees_directus_users').readMany({
       filter: {
         directus_users_id: {
@@ -49,7 +50,6 @@
         }
       }
     });
-    console.log(ratedCoffees);
     const ratedCoffeeIds = ratedCoffees.map((coffee) => coffee.coffees_id);
     const { data: unratedCoffees } = await directus.items('coffees').readMany({
       filter: {
@@ -58,7 +58,7 @@
         }
       }
     });
-    coffeeList = unratedCoffees;
+    coffeeList = unratedCoffees as Coffee[];
   });
 </script>
 

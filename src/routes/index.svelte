@@ -1,10 +1,10 @@
-<script context="module">
-  import { directus } from '$lib/directus';
-  let coffees = [];
+<script context="module" lang="ts">
+  import { directus, Coffee } from '$lib/directus';
+  let coffees: Coffee[] = [];
   export async function load() {
-    let { data } = await directus
+    let { data } = (await directus
       .items('coffees')
-      .readMany({ fields: ['*', 'image.id', 'ratings.rating'] });
+      .readMany({ fields: ['*', 'image.id', 'ratings.rating'] })) as { data: Coffee[] };
     coffees = data;
     return {};
   }

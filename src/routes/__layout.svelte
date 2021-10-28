@@ -1,6 +1,6 @@
-<script context="module">
+<script context="module" lang="ts">
   import { directus } from '$lib/directus';
-  let loading = true;
+  let loading: boolean = true;
   export const load = async ({ session }) => {
     if (session.user) {
       return {};
@@ -15,13 +15,13 @@
   };
 </script>
 
-<script>
+<script lang="ts">
   import AddCoffeeButton from '$lib/components/add-coffee-button.svelte';
   import '../styles/tailwind-output.css';
   import Navbar from '$lib/components/navbar.svelte';
   import { session } from '$app/stores';
   const me = $session.user;
-  loading = false;
+  let loading = false;
 </script>
 
 <Navbar {loading} />

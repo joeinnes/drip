@@ -1,12 +1,13 @@
-<script>
+<script lang="ts">
   import CoffeeBean from '/coffee_bean.webp';
   import CoffeeBeanHalf from '/coffee_bean_half.webp';
   import CoffeeBeanFilled from '/coffee_bean_full.webp';
-  export let rating = null;
-  export let interactive = true;
-  let active = false;
+  export let rating: number = null,
+    interactive: boolean = false;
+  let active: boolean = false;
 
-  const mouseMoveHandler = (e) => {
+  const mouseMoveHandler = (e: DragEvent & { currentTarget: HTMLImageElement }) => {
+    // This causes a TS error for some reason
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const offset = parseInt(e.currentTarget.id, 10);

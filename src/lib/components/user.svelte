@@ -1,13 +1,13 @@
-<script>
+<script lang="ts">
   import { onMount } from 'svelte';
-  import { directus } from '$lib/directus';
+  import { directus, User } from '$lib/directus';
   import { goto } from '$app/navigation';
 
-  let loading = true;
-  let me = null;
+  let loading: boolean = true;
+  let me: User = null;
   onMount(async () => {
     try {
-      me = await directus.users.me.read();
+      me = (await directus.users.me.read()) as User;
     } catch (e) {
       console.log('Not logged in');
     } finally {

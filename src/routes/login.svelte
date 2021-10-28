@@ -1,10 +1,10 @@
-<script context="module">
+<script context="module" lang="ts">
   import { goto } from '$app/navigation';
   import { session } from '$app/stores';
-  import { directus } from '$lib/directus';
+  import { directus, User } from '$lib/directus';
   export async function load() {
     try {
-      const user = await directus.users.me.read();
+      const user = (await directus.users.me.read()) as User;
       session.set(user);
       goto('/');
     } catch (e) {
@@ -15,11 +15,11 @@
   }
 </script>
 
-<script>
-  let email,
-    password,
-    isLoading = false;
-  const login = async (e) => {
+<script lang="ts">
+  let email: string = null,
+    password: string = null,
+    isLoading: boolean = false;
+  const login = async (e: Event) => {
     e.preventDefault();
     isLoading = true;
     try {

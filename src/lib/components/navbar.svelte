@@ -1,9 +1,9 @@
-<script>
+<script lang="ts">
   import { directus } from '$lib/directus';
   import { goto } from '$app/navigation';
   import { session } from '$app/stores';
 
-  const me = $session?.user;
+  const me = $session.user;
   export let loading = true;
   const logout = async () => {
     await directus.auth.logout();

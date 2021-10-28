@@ -1,9 +1,9 @@
-<script context="module">
-  import { directus } from '$lib/directus';
-  let coffee = {};
+<script context="module" lang="ts">
+  import { directus, Coffee } from '$lib/directus';
+  let coffee: Coffee;
   export async function load({ page }) {
     try {
-      const data = await directus.items('coffees').readOne(page.params.id, {
+      const data = (await directus.items('coffees').readOne(page.params.id, {
         fields: [
           '*',
           'image.id',
@@ -12,7 +12,7 @@
           'ratings.directus_users_id.last_name',
           'ratings.directus_users_id.avatar'
         ]
-      });
+      })) as Coffee;
       coffee = data;
     } catch (e) {
       return {
@@ -24,7 +24,7 @@
   }
 </script>
 
-<script>
+<script lang="ts">
   import CoffeeCard from '$lib/components/coffee-card.svelte';
   import Rating from '$lib/components/rating.svelte';
 </script>

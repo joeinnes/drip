@@ -1,7 +1,8 @@
-<script>
+<script lang="ts">
   import RatingWidget from './rating-widget.svelte';
+  import type { Rating } from '$lib/directus';
 
-  export let rating;
+  export let rating: Rating;
 </script>
 
 <div class="shadow-lg card bg-white p-4">

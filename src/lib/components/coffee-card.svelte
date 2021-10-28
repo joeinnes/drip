@@ -1,17 +1,19 @@
-<script>
+<script lang="ts">
   import RatingWidget from './rating-widget.svelte';
+  import type { Coffee } from '$lib/directus';
 
-  export let coffee,
-    side = false;
+  export let coffee: Coffee = null,
+    side: boolean = false;
 
   const rating =
-    coffee?.ratings?.reduce((acc, curr) => acc + curr.rating, 0) / coffee?.ratings?.length || 0;
+    coffee.ratings.reduce((acc: number, curr: { rating: number }) => acc + curr.rating, 0) /
+      coffee.ratings.length || 0;
 </script>
 
 <div class={`shadow-lg card bg-white pt-4 mb-8 ${side && 'flex flex-col lg:flex-row'}`}>
   <figure class="relative">
     <img
-      src={`${import.meta.env.VITE_API_URL}/assets/${coffee?.image?.id}`}
+      src={`${import.meta.env.VITE_API_URL}/assets/${coffee.image.id}`}
       alt={coffee.name}
       class="object-contain"
       style="max-height:50vh;"
@@ -24,7 +26,7 @@
           {coffee.name}
         </h2>
         <div class="badge badge-neutral mb-4 mt-0 font-semibold">
-          {coffee?.cost?.toLocaleString()} HUF/kg
+          {coffee.cost.toLocaleString()} HUF/kg
         </div>
       </div>
       <div class="w-32 my-4 flex-shrink-0 pl-2">

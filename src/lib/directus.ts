@@ -9,17 +9,27 @@ type Coffee = {
     id: string;
   }
   ratings: Rating[];
+  link: string;
 };
 
 type Rating = {
-  id: string;
-  directus_users_id: string;
-  coffees_id: string;
+  id?: string;
+  directus_users_id: User;
+  coffees_id: Coffee;
   comments: string;
   rating: number;
-  date: string;
+  date?: string;
 }
 
+type User = {
+  id: string;
+  first_name: string;
+  last_name: string;
+  image: {
+    id: string;
+  }
+  avatar: string;
+};
 // Map your collections to its respective types. The SDK will
 // infer its types based on usage later.
 type DripAPI = {
@@ -30,13 +40,9 @@ type DripAPI = {
   // You can also extend Directus collection. The naming has
   // to match a Directus system collection and it will be merged
   // into the system spec.
-  directus_users: {
-    first_name: string;
-    last_name: string;
-    image: {
-      id: string;
-    }
-  };
+  directus_users: User;
 };
 
 export const directus = new Directus<DripAPI>('https://api.traist.co.uk/');
+
+export type { Coffee, Rating, User };
