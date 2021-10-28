@@ -16,9 +16,22 @@
 </script>
 
 <script lang="ts">
+  import ErrorAlert from '$lib/components/error-alert.svelte';
+
   let email: string = null,
     password: string = null,
-    isLoading: boolean = false;
+    isLoading: boolean = false,
+    error: string = null,
+    errorTimeout: NodeJS.Timeout = null;
+
+  const setError = (err: string) => {
+    error = err;
+    errorTimeout = setTimeout(() => {
+      error = null;
+      errorTimeout = null;
+    }, 5000);
+  };
+  const clearError = () => (error = null);
   const login = async (e: Event) => {
     e.preventDefault();
     isLoading = true;
@@ -34,9 +47,11 @@
           }
         }
       );
+      const me = await directus.users.me.read();
+      session.set({ user: me });
       goto('/');
     } catch (e) {
-      console.error(e);
+      setError('Login unsuccessful');
     } finally {
       isLoading = false;
     }
@@ -77,7 +92,11 @@
           required
         />
       </div>
-
+      <div class="mb-2">
+        {#if error}
+          <ErrorAlert bind:error {clearError} />
+        {/if}
+      </div>
       <div class="justify-center card-actions">
         {#if isLoading}
           <button type="submit" disabled class="btn btn-primary btn-disabled">Log In</button>

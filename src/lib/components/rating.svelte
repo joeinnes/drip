@@ -1,11 +1,26 @@
 <script lang="ts">
+  import { directus } from '$lib/directus';
   import RatingWidget from './rating-widget.svelte';
   import type { Rating } from '$lib/directus';
-
+  import { session } from '$app/stores';
+  import { goto } from '$app/navigation';
+  const me = $session.user;
   export let rating: Rating;
+
+  const deleteRating = async () => {
+    try {
+      await directus.items('coffees_directus_users').deleteOne(rating.id);
+      goto(`/`);
+    } catch (e) {
+      console.error(e);
+    }
+  };
 </script>
 
 <div class="shadow-lg card bg-white p-4">
+  {#if rating.directus_users_id.id === me?.id}
+    <button class="btn btn-circle btn-xs absolute top-2 right-2" on:click={deleteRating}>x</button
+    >{/if}
   <div class="flex flex-col md:flex-row items-center">
     <div class="flex flex-col flex-shrink-0 p-2 content-center">
       <div class="avatar">

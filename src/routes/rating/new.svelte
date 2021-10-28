@@ -9,7 +9,7 @@
   let loading: boolean = false,
     error: string = null,
     errorTimeout: NodeJS.Timeout = null,
-    coffeeList: Coffee[] = null,
+    coffeeList: Coffee[] = [],
     me: User | null = null,
     form = { comments: null, rating: null, coffees_id: null };
 

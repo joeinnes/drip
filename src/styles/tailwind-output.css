@@ -919,6 +919,10 @@ html {
 	color: hsla(var(--nc)/var(--tw-text-opacity,1));
 	z-index: 20;
 }
+.checkbox:focus {
+	outline: 2px solid transparent;
+	outline-offset: 2px;
+}
 .dropdown {
 	display: inline-block;
 	position: relative;
@@ -1085,6 +1089,61 @@ html {
 }
 .menu :where(li).disabled>a,.menu :where(li).disabled>span {
 	cursor: auto;
+}
+.modal {
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+	opacity: 0;
+	pointer-events: none;
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	visibility: hidden;
+	z-index: 999;
+	--tw-bg-opacity: 1;
+	--tw-bg-opacity: 0.4;
+	background-color: hsla(var(--nf)/var(--tw-bg-opacity,1));
+	transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,transform;
+	transition-duration: .15s;
+	transition-duration: .2s;
+	transition-timing-function: cubic-bezier(.4,0,.2,1);
+}
+@media (min-width:640px) {
+
+	.modal {
+		align-items: center;
+	}
+
+	.modal-box {
+		max-width: 32rem;
+		--tw-scale-x: .9;
+		--tw-scale-y: .9;
+		--tw-translate-y: 0px;
+		border-bottom-left-radius: var(--rounded-box,1rem);
+		border-bottom-right-radius: var(--rounded-box,1rem);
+	}
+}
+.modal-open,.modal-toggle:checked+.modal,.modal:target {
+	opacity: 1;
+	pointer-events: auto;
+	visibility: visible;
+}
+.modal-action {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 1.5rem;
+}
+.modal-toggle {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	height: 0;
+	opacity: 0;
+	position: absolute;
+	width: 0;
 }
 .navbar {
 	display: flex;
@@ -1542,6 +1601,39 @@ html {
 .card-actions:last-child {
 	margin-top: 1.5rem;
 }
+.checkbox {
+	--chkbg: var(--bc);
+	--chkfg: var(--b1);
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	--tw-border-opacity: 1;
+	--tw-border-opacity: 0.2;
+	border-color: hsla(var(--bc)/var(--tw-border-opacity,1));
+	border-width: 1px;
+	cursor: pointer;
+	height: 1.5rem;
+	width: 1.5rem;
+	border-radius: var(--rounded-btn,.5rem);
+}
+.checkbox:focus-visible {
+	box-shadow: 0 0 0 2px hsl(var(--b1)),0 0 0 4px hsl(var(--bc));
+}
+.checkbox:checked {
+	--tw-bg-opacity: 1;
+	background-color: hsla(var(--bc)/var(--tw-bg-opacity,1));
+	background-repeat: no-repeat;
+	-webkit-animation: checkmark var(--animation-input,.2s) ease-in-out;
+	animation: checkmark var(--animation-input,.2s) ease-in-out;
+	background-image: linear-gradient(-45deg,transparent 65%,hsl(var(--chkbg)) 0),linear-gradient(45deg,transparent 75%,hsl(var(--chkbg)) 0),linear-gradient(-45deg,hsl(var(--chkbg)) 40%,transparent 0),linear-gradient(45deg,hsl(var(--chkbg)) 30%,hsl(var(--chkfg)) 0,hsl(var(--chkfg)) 40%,transparent 0),linear-gradient(-45deg,hsl(var(--chkfg)) 50%,hsl(var(--chkbg)) 0);
+}
+.checkbox:disabled {
+	--tw-bg-opacity: 1;
+	background-color: hsla(var(--bc)/var(--tw-bg-opacity,1));
+	border-color: transparent;
+	cursor: not-allowed;
+	opacity: .2;
+}
 @-webkit-keyframes checkmark {
 
 	0% {
@@ -1720,6 +1812,38 @@ html {
 	border-radius: 40px;
 	margin-top: -25px;
 }
+.modal-box {
+	--tw-bg-opacity: 1;
+	background-color: hsla(var(--b1)/var(--tw-bg-opacity,1));
+	padding: 1.5rem;
+	width: 100%;
+	--tw-translate-x: 0;
+	--tw-translate-y: 0;
+	--tw-translate-y: 2.5rem;
+	--tw-rotate: 0;
+	--tw-skew-x: 0;
+	--tw-skew-y: 0;
+	--tw-scale-x: 1;
+	--tw-scale-y: 1;
+	transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+	transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,transform;
+	transition-duration: .15s;
+	transition-duration: .2s;
+	transition-timing-function: cubic-bezier(.4,0,.2,1);
+	border-top-left-radius: var(--rounded-box,1rem);
+	border-top-right-radius: var(--rounded-box,1rem);
+	box-shadow: 0 25px 50px -12px rgba(0,0,0,.25);
+}
+.modal-open .modal-box,.modal-toggle:checked+.modal .modal-box,.modal:target .modal-box {
+	--tw-scale-x: 1;
+	--tw-scale-y: 1;
+	--tw-translate-y: 0px;
+}
+.modal-action>:not([hidden])~:not([hidden]) {
+	--tw-space-x-reverse: 0;
+	margin-right: calc(0.5rem*var(--tw-space-x-reverse));
+	margin-left: calc(0.5rem*(1 - var(--tw-space-x-reverse)));
+}
 @-webkit-keyframes radiomark {
 
 	0% {
@@ -1829,6 +1953,13 @@ html {
 .rounded-box {
 	border-radius: var(--rounded-box,1rem);
 }
+.btn-xs {
+	height: 1.5rem;
+	padding-left: .5rem;
+	padding-right: .5rem;
+	min-height: 1.5rem;
+	font-size: .75rem;
+}
 .btn-sm {
 	height: 2rem;
 	padding-left: .75rem;
@@ -1842,6 +1973,11 @@ html {
 	padding-right: 1.5rem;
 	min-height: 4rem;
 	font-size: 1.125rem;
+}
+.btn-square.btn-xs {
+	height: 1.5rem;
+	padding: 0;
+	width: 1.5rem;
 }
 .btn-square.btn-sm {
 	height: 2rem;
@@ -1915,6 +2051,9 @@ html {
 .fixed {
 	position: fixed;
 }
+.absolute {
+	position: absolute;
+}
 .relative {
 	position: relative;
 }
@@ -1923,6 +2062,12 @@ html {
 }
 .bottom-4 {
 	bottom: 1rem;
+}
+.top-2 {
+	top: 0.5rem;
+}
+.right-2 {
+	right: 0.5rem;
 }
 .m-1 {
 	margin: 0.25rem;
