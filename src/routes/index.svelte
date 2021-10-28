@@ -11,7 +11,7 @@
 </script>
 
 <script>
-  import CoffeeCard from '../components/coffee-card.svelte';
+  import CoffeeCard from '$lib/components/coffee-card.svelte';
 </script>
 
 <svelte:head>

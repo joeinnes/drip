@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { directus } from '../../lib/directus';
+  import { directus } from '$lib/directus';
   import { slide } from 'svelte/transition';
   import { goto } from '$app/navigation';
-  import ErrorAlert from '../../components/error-alert.svelte';
+  import ErrorAlert from '$lib/components/error-alert.svelte';
   import { onMount } from 'svelte';
-  import RatingWidget from '../../components/rating-widget.svelte';
+  import RatingWidget from '$lib/components/rating-widget.svelte';
 
   let loading: boolean = false,
     error: string = null,
@@ -75,7 +75,7 @@
       <label class="label" for="name">
         <span class="label-text">Coffee</span>
       </label>
-      <select class="select select-bordered w-full max-w-xs" bind:value={form.coffees_id} required>
+      <select class="select select-bordered w-full" bind:value={form.coffees_id} required>
         <option disabled selected>Choose a coffee</option>
         {#each coffeeList as coffee}
           <option value={coffee.id}>{coffee.name}</option>
@@ -108,4 +108,3 @@
     >
   </div>
 </div>
-<pre>{JSON.stringify(form)}</pre>

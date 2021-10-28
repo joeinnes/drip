@@ -7,6 +7,7 @@
   export let loading = true;
   const logout = async () => {
     await directus.auth.logout();
+    session.set({ user: null });
     goto('/login');
   };
 </script>
@@ -18,7 +19,7 @@
 
   {#if !loading}
     {#if me}
-      <div class="flex-none">
+      <div class="flex-none" on:click={logout}>
         <div class="avatar">
           <div class="w-10 h-10 m-1 rounded-full">
             <img src={`${import.meta.env.VITE_API_URL}/assets/${me.avatar}`} alt="Profile" />

@@ -16,9 +16,9 @@
 </script>
 
 <script>
-  import AddCoffeeButton from '../components/add-coffee-button.svelte';
+  import AddCoffeeButton from '$lib/components/add-coffee-button.svelte';
   import '../styles/tailwind-output.css';
-  import Navbar from '../components/navbar.svelte';
+  import Navbar from '$lib/components/navbar.svelte';
   import { session } from '$app/stores';
   const me = $session.user;
   loading = false;

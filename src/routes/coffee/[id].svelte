@@ -25,8 +25,8 @@
 </script>
 
 <script>
-  import CoffeeCard from '../../components/coffee-card.svelte';
-  import Rating from '../../components/rating.svelte';
+  import CoffeeCard from '$lib/components/coffee-card.svelte';
+  import Rating from '$lib/components/rating.svelte';
 </script>
 
 <svelte:head>

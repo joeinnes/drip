@@ -1,8 +1,9 @@
 <script lang="ts">
-  import { directus } from '../../lib/directus';
+  import ImageInput from '$lib/components/image-input.svelte';
+  import { directus } from '$lib/directus';
   import { slide } from 'svelte/transition';
   import { goto } from '$app/navigation';
-  import ErrorAlert from '../../components/error-alert.svelte';
+  import ErrorAlert from '$lib/components/error-alert.svelte';
 
   let droppedFile: File,
     preview: string | ArrayBuffer,
@@ -104,33 +105,7 @@
           />
         </div>
       </div>
-      <div
-        on:drop|preventDefault|stopPropagation={dropHandler}
-        on:drag|preventDefault|stopPropagation
-        on:dragstart|preventDefault|stopPropagation
-        on:dragend|preventDefault|stopPropagation
-        on:dragover|preventDefault|stopPropagation
-        on:dragenter|preventDefault|stopPropagation
-        on:dragleave|preventDefault|stopPropagation
-        on:drop|preventDefault|stopPropagation
-      >
-        <label class="label" for="file">
-          <span class="label-text">Image</span>
-        </label>
-        <div class="w-full h-64 bg-secondary rounded-lg overflow-hidden p-2">
-          <div
-            class="rounded-lg border-dotted border-neutral border-2 w-full h-full flex items-center justify-center"
-            class:bg-white={preview}
-          >
-            {#if preview}<img
-                src={preview}
-                alt="Preview"
-                class="object-contain w-full h-full"
-              />{:else}<label for="file">Choose a file or drag it here.</label>{/if}
-            <input type="file" name="file" id="file" accept="image/*" class="hidden" required />
-          </div>
-        </div>
-      </div>
+      <ImageInput errorHandler={setError} />
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
