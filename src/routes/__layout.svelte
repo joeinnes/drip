@@ -25,7 +25,7 @@
 </script>
 
 <Navbar {me} {loading} />
-<main class="w-3/4 2xl:w-1/2 p-8 mx-auto">
+<main class="container p-8 mx-auto">
   <slot />
 </main>
 <AddCoffeeButton />

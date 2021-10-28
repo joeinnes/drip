@@ -8,7 +8,7 @@
     coffee?.ratings?.reduce((acc, curr) => acc + curr.rating, 0) / coffee?.ratings?.length || 0;
 </script>
 
-<div class={`shadow-lg card bg-white mb-8 ${side && 'flex flex-col lg:flex-row'}`}>
+<div class={`shadow-lg card bg-white pt-4 mb-8 ${side && 'flex flex-col lg:flex-row'}`}>
   <figure class="relative">
     <img
       src={`${import.meta.env.VITE_API_URL}/assets/${coffee?.image?.id}`}
@@ -18,7 +18,7 @@
     />
   </figure>
   <div class="card-body">
-    <div class="flex justify-between items-center">
+    <div class="flex justify-between items-start">
       <div>
         <h2 class="card-title mb-0">
           {coffee.name}
@@ -27,7 +27,7 @@
           {coffee?.cost?.toLocaleString()} HUF/kg
         </div>
       </div>
-      <div class="w-32 mb-2">
+      <div class="w-32 my-4 flex-shrink-0 pl-2">
         <RatingWidget {rating} interactive={false} />
       </div>
     </div>

@@ -1,44 +1,64 @@
-<script>
+<script lang="ts">
   import { directus } from '../../lib/directus';
   import { slide } from 'svelte/transition';
-  let droppedFile,
-    preview,
-    loading = false,
-    error = false,
+  import { goto } from '$app/navigation';
+  let droppedFile: File,
+    preview: string | ArrayBuffer,
+    loading: boolean = false,
+    error: string = null,
+    errorTimeout: NodeJS.Timeout = null,
     form = { name: null, description: null, link: null, cost: null };
-  const dropHandler = (e) => {
-    droppedFile = e.dataTransfer.files[0];
-    let reader = new FileReader();
-    reader.readAsDataURL(droppedFile);
-    reader.onloadend = () => (preview = reader.result);
+
+  const setError = (err: string) => {
+    error = err;
+    errorTimeout = setTimeout(() => {
+      error = null;
+      errorTimeout = null;
+    }, 5000);
+  };
+  const dropHandler = (e: DragEvent) => {
+    try {
+      droppedFile = e.dataTransfer.files[0];
+      let reader = new FileReader();
+      reader.readAsDataURL(droppedFile);
+      reader.onloadend = () => (preview = reader.result);
+    } catch (e) {
+      setError('File could not be processed.');
+    }
   };
 
   const uploadImage = async () => {
-    const formData = new FormData();
+    try {
+      const formData = new FormData();
 
-    formData.append('title', form.name);
-    formData.append('file', droppedFile);
+      formData.append('title', form.name);
+      formData.append('file', droppedFile);
 
-    const imgRes = await fetch(`${import.meta.env.VITE_API_URL}/files`, {
-      method: 'post',
-      body: formData
-    });
+      const imgRes = await fetch(`${import.meta.env.VITE_API_URL}/files`, {
+        method: 'post',
+        body: formData
+      });
 
-    const img = await imgRes.json();
+      const img = await imgRes.json();
 
-    return img.data;
+      return img.data;
+    } catch (e) {
+      throw new Error('Could not upload image.');
+    }
   };
 
   const submitForm = async () => {
     try {
       loading = true;
       if (!(form.name && form.description && form.link && form.cost && droppedFile)) {
-        throw new Error('Not all data provided');
+        setError('Not all data provided');
+        throw new Error();
       }
       const { id: imgId } = await uploadImage();
       const res = await directus.items('coffees').createOne({ ...form, image: imgId });
+      goto(`coffee/${res.id}`);
     } catch (e) {
-      error = e;
+      setError(error || 'An unknown error occurred');
     } finally {
       loading = false;
     }
@@ -94,9 +114,9 @@
         <label class="label" for="file">
           <span class="label-text">Image</span>
         </label>
-        <div class="w-full h-64 bg-primary rounded-lg overflow-hidden p-2">
+        <div class="w-full h-64 bg-secondary rounded-lg overflow-hidden p-2">
           <div
-            class="rounded-lg border-dashed border-4 w-full h-full flex items-center justify-center"
+            class="rounded-lg border-dotted border-neutral border-2 w-full h-full flex items-center justify-center"
             class:bg-white={preview}
           >
             {#if preview}<img
