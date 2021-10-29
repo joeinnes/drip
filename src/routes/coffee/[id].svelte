@@ -18,6 +18,7 @@
       })) as Coffee;
       coffee = data;
     } catch (e) {
+      console.log(e);
       return {
         status: 404,
         error: 'This coffee does not exist'
@@ -44,7 +45,7 @@
     rating: null
   };
 
-  if (coffee.ratings.find((rating) => rating.directus_users_id.id === me.id)) {
+  if (coffee.ratings.find((rating) => rating.directus_users_id.id === me?.id)) {
     hasCommented = true;
   }
 

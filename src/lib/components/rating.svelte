@@ -18,7 +18,7 @@
 </script>
 
 <div class="shadow-lg card bg-white p-4">
-  {#if rating.directus_users_id.id === me?.id}
+  {#if rating.directus_users_id.id === me && me.id}
     <button class="btn btn-circle btn-xs absolute top-2 right-2" on:click={deleteRating}>x</button
     >{/if}
   <div class="flex flex-col md:flex-row items-center">

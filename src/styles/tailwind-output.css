@@ -2090,6 +2090,9 @@ html {
 .mb-4 {
 	margin-bottom: 1rem;
 }
+.mt-4 {
+	margin-top: 1rem;
+}
 .mb-8 {
 	margin-bottom: 2rem;
 }
@@ -2107,9 +2110,6 @@ html {
 }
 .mr-2 {
 	margin-right: 0.5rem;
-}
-.mt-4 {
-	margin-top: 1rem;
 }
 .block {
 	display: block;
@@ -2216,9 +2216,6 @@ html {
 .justify-between {
 	justify-content: space-between;
 }
-.justify-items-start {
-	justify-items: start;
-}
 .gap-4 {
 	gap: 1rem;
 }
@@ -2293,9 +2290,6 @@ html {
 }
 .pr-3 {
 	padding-right: 0.75rem;
-}
-.pb-2 {
-	padding-bottom: 0.5rem;
 }
 .text-2xl {
 	font-size: 1.5rem;
