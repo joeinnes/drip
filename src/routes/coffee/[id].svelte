@@ -92,8 +92,8 @@
       <Rating {rating} />
     {/each}
   {/if}
-  {#if !hasCommented}
-    <div class="w-full">
+  {#if !hasCommented || !$session.user}
+    <div class="w-full mt-4">
       <label for="rating-modal" class="btn btn-primary modal-button flex">Rate This Coffee!</label>
       <input type="checkbox" id="rating-modal" class="modal-toggle" />
       <div class="modal">

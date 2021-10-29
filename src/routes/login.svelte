@@ -5,7 +5,7 @@
   export async function load() {
     try {
       const user = (await directus.users.me.read()) as User;
-      session.set(user);
+      session.set({ user });
       goto('/');
     } catch (e) {
       console.log('Not logged in');
