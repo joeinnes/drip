@@ -23,7 +23,7 @@
   const me = $session.user;
 </script>
 
-<Navbar {loading} />
+<Navbar />
 <main class="container p-8 mx-auto">
   <slot />
 </main>
