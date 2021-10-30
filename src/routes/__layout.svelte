@@ -16,12 +16,19 @@
 </script>
 
 <script lang="ts">
-  import AddCoffeeButton from '$lib/components/add-coffee-button.svelte';
   import '../styles/tailwind-output.css';
-  import Navbar from '$lib/components/navbar.svelte';
+  import favicon from '../../static/coffee_bean.webp';
   import { session } from '$app/stores';
+
+  import Navbar from '$lib/components/navbar.svelte';
+  import AddCoffeeButton from '$lib/components/add-coffee-button.svelte';
+
   const me = $session.user;
 </script>
+
+<svelte:head>
+  <link rel="shortcut icon" type="image/webp" href={favicon} />
+</svelte:head>
 
 <Navbar />
 <main class="container p-8 mx-auto">

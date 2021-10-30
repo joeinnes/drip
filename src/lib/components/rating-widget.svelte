@@ -26,7 +26,11 @@
   };
 </script>
 
-<div class="flex max-w-full" on:click={() => (active = !active)}>
+<div
+  class="grid max-w-full"
+  class:grid-cols-5={rating > 0 || interactive}
+  on:click={() => (active = !active)}
+>
   {#if rating === 0 && !interactive}
     No rating yet!
   {:else}
