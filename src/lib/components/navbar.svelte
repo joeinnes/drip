@@ -46,14 +46,14 @@
 
   {#if me}
     <div class="flex-none" on:click={logout}>
-      <div class="avatar">
+      <div class="avatar" class:hidden={!me.avatar}>
         <div class="w-10 h-10 m-1 rounded-full">
           <img src={`${import.meta.env.VITE_API_URL}/assets/${me.avatar}`} alt="Profile" />
         </div>
       </div>
       <div class="m-2">
-        {me.first_name}
-        {me.last_name}
+        {me.first_name || me.email}
+        {me.last_name || null}
       </div>
     </div>
   {:else}
