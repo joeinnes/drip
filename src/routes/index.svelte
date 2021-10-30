@@ -12,6 +12,25 @@
 
 <script>
   import CoffeeCard from '$lib/components/coffee-card.svelte';
+  import { onMount } from 'svelte';
+  import { session } from '$app/stores';
+
+  onMount(() => {
+    directus.users.me.read().then((me) => {
+      session.update((sess) => {
+        return {
+          ...sess,
+          user: me,
+          path: [
+            {
+              label: 'Home',
+              link: '/'
+            }
+          ]
+        };
+      });
+    });
+  });
 </script>
 
 <svelte:head>

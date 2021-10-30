@@ -1,4 +1,5 @@
 <script context="module" lang="ts">
+  import { session } from '$app/stores';
   import { directus, Coffee } from '$lib/directus';
   let coffee: Coffee;
   export async function load({ page }) {
@@ -8,6 +9,7 @@
         .readOne(page.params.id, { fields: ['*', 'image.id'] })) as Coffee;
       coffee = data;
     } catch (e) {
+      console.error(e);
       return {
         status: 404,
         error: 'This coffee does not exist'
@@ -32,7 +34,7 @@
   import { slide } from 'svelte/transition';
   import { goto } from '$app/navigation';
   import ErrorAlert from '$lib/components/error-alert.svelte';
-
+  import { onMount } from 'svelte';
   let droppedFile: File,
     loading: boolean = false,
     error: string = null,
@@ -103,6 +105,25 @@
       loading = false;
     }
   };
+  onMount(() => {
+    session.set({
+      ...session,
+      path: [
+        {
+          label: 'Home',
+          link: '/'
+        },
+        {
+          label: 'Coffees',
+          link: '/'
+        },
+        {
+          label: coffee.name,
+          link: '/coffees/' + coffee.id
+        }
+      ]
+    });
+  });
 </script>
 
 <svelte:head>

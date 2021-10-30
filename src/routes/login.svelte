@@ -1,22 +1,12 @@
 <script context="module" lang="ts">
   import { goto } from '$app/navigation';
-  import { session } from '$app/stores';
   import { directus, User } from '$lib/directus';
-  export async function load() {
-    try {
-      const user = (await directus.users.me.read()) as User;
-      session.set({ user });
-      goto('/');
-    } catch (e) {
-      console.log('Not logged in');
-    } finally {
-      return {};
-    }
-  }
 </script>
 
 <script lang="ts">
+  import { session } from '$app/stores';
   import ErrorAlert from '$lib/components/error-alert.svelte';
+  import { onMount } from 'svelte';
 
   let email: string = null,
     password: string = null,
@@ -47,8 +37,11 @@
           }
         }
       );
-      const me = await directus.users.me.read();
-      session.set({ user: me });
+      const me = (await directus.users.me.read()) as User;
+      session.update((sess) => {
+        sess.user = me;
+        return sess;
+      });
       goto('/');
     } catch (e) {
       setError('Login unsuccessful');
@@ -56,6 +49,31 @@
       isLoading = false;
     }
   };
+
+  onMount(async () => {
+    session.set({
+      path: [
+        {
+          label: 'Home',
+          link: '/'
+        },
+        {
+          label: 'Login',
+          link: '/login'
+        }
+      ]
+    });
+    try {
+      const me = (await directus.users.me.read()) as User;
+      session.update((sess) => {
+        sess.user = me;
+        return sess;
+      });
+      goto('/');
+    } catch (e) {
+      console.log(e);
+    }
+  });
 </script>
 
 <svelte:head>

@@ -4,7 +4,22 @@
   import { session } from '$app/stores';
 
   let me = null;
-  session.subscribe((sess) => (me = sess.user));
+  let breadcrumbs = [
+    {
+      label: 'Home',
+      link: '/'
+    }
+  ];
+
+  session.subscribe((sess) => {
+    me = sess.user;
+    breadcrumbs = sess.path || [
+      {
+        label: 'Home',
+        link: '/'
+      }
+    ];
+  });
 
   const logout = async () => {
     await directus.auth.logout();
@@ -13,9 +28,20 @@
   };
 </script>
 
-<div class="mb-2 shadow-lg navbar bg-neutral text-neutral-content">
-  <div class="flex-1 px-2 mx-2">
-    <a href="/" class="text-2xl font-bold"> {import.meta.env.VITE_APP_NAME}</a>
+<div class="mb-2 shadow-lg navbar bg-neutral text-neutral-content items-center">
+  <div class="flex-1">
+    <div class="px-2 mx-2 mr-6">
+      <a href="/" class="text-2xl font-bold"> {import.meta.env.VITE_APP_NAME}</a>
+    </div>
+    <div class="text-sm breadcrumbs hidden md:block ">
+      <ul>
+        {#each breadcrumbs as breadcrumb}
+          <li>
+            <a href={breadcrumb.link}>{breadcrumb.label}</a>
+          </li>
+        {/each}
+      </ul>
+    </div>
   </div>
 
   {#if me}

@@ -1,9 +1,23 @@
+<script lang="ts" context="module">
+  export const load = async ({ session }) => {
+    let user = await session;
+    if (!user) {
+      return {
+        status: 403,
+        error: 'You cannot add coffee if you are not logged in.'
+      };
+    }
+    return {};
+  };
+</script>
+
 <script lang="ts">
   import { directus, Coffee, User, Rating } from '$lib/directus';
   import { slide } from 'svelte/transition';
   import { goto } from '$app/navigation';
   import ErrorAlert from '$lib/components/error-alert.svelte';
   import { onMount } from 'svelte';
+  import { session } from '$app/stores';
   import RatingWidget from '$lib/components/rating-widget.svelte';
 
   let loading: boolean = false,
@@ -59,6 +73,27 @@
       }
     });
     coffeeList = unratedCoffees as Coffee[];
+  });
+  onMount(() => {
+    session.update((s) => {
+      return {
+        ...s,
+        path: [
+          {
+            label: 'Home',
+            link: '/'
+          },
+          {
+            label: 'Ratings',
+            link: '/'
+          },
+          {
+            label: 'New',
+            link: '/coffee/new'
+          }
+        ]
+      };
+    });
   });
 </script>
 

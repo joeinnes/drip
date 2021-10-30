@@ -1,29 +1,25 @@
-<script context="module" lang="ts">
-  import { directus } from '$lib/directus';
-  let loading: boolean = true;
-  export const load = async ({ session }) => {
-    if (session.user) {
-      return {};
-    }
-    try {
-      session.user = await directus.users.me.read();
-    } catch (e) {
-      console.log('Not logged in');
-    } finally {
-      return {};
-    }
-  };
-</script>
-
 <script lang="ts">
+  import { directus } from '$lib/directus';
   import '../styles/tailwind-output.css';
   import favicon from '../../static/coffee_bean.webp';
   import { session } from '$app/stores';
 
   import Navbar from '$lib/components/navbar.svelte';
   import AddCoffeeButton from '$lib/components/add-coffee-button.svelte';
+  import { onMount } from 'svelte';
 
-  const me = $session.user;
+  let me = $session.user;
+
+  onMount(() => {
+    session.update(async (sess) => {
+      try {
+        me = await directus.users.me.read();
+        return { ...sess, user: me };
+      } catch (e) {
+        console.log(e);
+      }
+    });
+  });
 </script>
 
 <svelte:head>

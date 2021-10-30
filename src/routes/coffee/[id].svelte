@@ -1,9 +1,9 @@
 <script context="module" lang="ts">
   import { directus, Coffee, Rating as RatingType } from '$lib/directus';
-  import { session } from '$app/stores';
+
   let coffee: Coffee;
 
-  export async function load({ page }) {
+  export async function load({ page, session }) {
     try {
       const data = (await directus.items('coffees').readOne(page.params.id, {
         fields: [
@@ -34,6 +34,8 @@
   import RatingWidget from '$lib/components/rating-widget.svelte';
   import ErrorAlert from '$lib/components/error-alert.svelte';
   import { goto } from '$app/navigation';
+  import { session } from '$app/stores';
+  import { onMount } from 'svelte';
 
   const me = $session.user;
   let hasCommented: boolean = false,
@@ -78,6 +80,25 @@
       loading = false;
     }
   };
+  onMount(() => {
+    session.set({
+      user: null,
+      path: [
+        {
+          label: 'Home',
+          link: '/'
+        },
+        {
+          label: 'Coffee',
+          link: '/'
+        },
+        {
+          label: coffee.name,
+          link: '/coffee' + coffee.id
+        }
+      ]
+    });
+  });
 </script>
 
 <svelte:head>
